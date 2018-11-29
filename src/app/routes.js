@@ -6,14 +6,21 @@ module.exports = (app, passport) => {
     })
   })
 
-  app.post('/login', async(req, res) =>{
-  })
+  app.post('/add', passport.authenticate('local-singin',{
+    successRedirect: '/menu',
+    failureRedirect: '/',
+    failureFlash: true
+  }))
+
+  //app.post('/login', passport.authenticate(''))
 
   app.post('/add', async (req, res) => {
 
   })
-  app.get('/test', async (req, res) => {
-    res.render('menu');
+  app.get('/menu', (req, res) => {
+    res.render('menu',{
+      user: req.user
+    })
   })
 
 }

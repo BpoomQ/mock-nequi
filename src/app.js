@@ -16,7 +16,7 @@ mongoose.connect( url, {useNewUrlParser: true})
   .then(db => console.log('DB connected'))
   .catch(err => console.log(err))
 
-//require('./config/passport')(passport)
+require('./config/passport.js')(passport)
 //settings
 app.set('port', process.env.PORT || 3000)
 app.set('views', path.join(__dirname,'views'))
