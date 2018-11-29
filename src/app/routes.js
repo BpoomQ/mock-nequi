@@ -25,12 +25,10 @@ module.exports = (app, passport) => {
     })
   })
 
-
-
 }
 
 function isLoggedIn(req,res,next) {
-  if (req.isAuthenticate()) {
+  if (req.isAuthenticated()) {
     return next
   }
   return res.redirect('/')
