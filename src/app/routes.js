@@ -19,7 +19,7 @@ module.exports = (app, passport) => {
     res.redirect('/')
   })
 
-  app.get('/menu', isLoggedIn(req, res) => {
+  app.get('/menu', isLoggedIn, (req, res) => {
     res.render('menu',{
       user: req.user
     })
