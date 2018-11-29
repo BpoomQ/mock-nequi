@@ -13,8 +13,8 @@ module.exports = function (passport) {
     })
   })
 
-  //Sing In
-  passport.use('local-singin', new LocalStrategy({
+  //sign in
+  passport.use('local-signin', new LocalStrategy({
     usernameField: 'email',
     passwordField: 'password',
     passReqToCallback: true
@@ -25,7 +25,7 @@ module.exports = function (passport) {
         return done(err)
       }
       if (user){
-        return done(null, false, req.flash('siginMessage','Ya existe un usuario registrado con ese email.'))
+        return done(null, false, req.flash('signinMessage','Ya existe un usuario registrado con ese email.'))
       } else {
         var newUser = new User()
         newUser.local.name = req.body.name
