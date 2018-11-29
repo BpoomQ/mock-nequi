@@ -30,8 +30,8 @@ Disponible = Total en la cuenta - dinero en colchón - dinero en metas - dinero 
 
 ### El objetivo de este proyecto es construir un sistema basado en consola que permita:
 
-1. Registrar nuevos usuarios con su nombre, email y contraseña.
-2. Iniciar sesión de un usuario con su email y contraseña. Cada usuario podrá realizar alguna de las siguientes opciones:
+* Registrar nuevos usuarios con su nombre, email y contraseña.
+* Iniciar sesión de un usuario con su email y contraseña. Cada usuario podrá realizar alguna de las siguientes opciones:
   * Consultar el saldo de disponible en su cuenta.
   * Consultar el saldo total en su cuenta.
   * Ingresar una cantidad determinada de dinero a su cuenta.
@@ -39,10 +39,10 @@ Disponible = Total en la cuenta - dinero en colchón - dinero en metas - dinero 
   * Enviar dinero a otro usuario a través de su email, desde cualquier cuenta de ahorros.
   * Consultar sus últimas N transacciones (ingresos, retiros, recepciones y envíos).
   * Entrar al menú del colchón, donde podrá:
-    1. Consultar el dinero guardado en el colchón.
-    2. Agregar dinero disponible al colchón.
-    3. Retirar dinero del colchón para que vuelva a estar disponible en la cuenta.
-    4. Regresar al menú anterior.
+    * Consultar el dinero guardado en el colchón.
+    * Agregar dinero disponible al colchón.
+    * Retirar dinero del colchón para que vuelva a estar disponible en la cuenta.
+    * Regresar al menú anterior.
   * Entrar al menú de bolsillos, donde podrá:
   * Listar la información de todos sus bolsillos (nombre y saldo).
   * Crear un bolsillo nuevo. El bolsillo se crea con un nombre y un saldo de 0.
@@ -58,7 +58,16 @@ Disponible = Total en la cuenta - dinero en colchón - dinero en metas - dinero 
   * Agregar dinero a una meta.
   * Regresar al menú anterior.
   * Cerrar sesión (volver al menú anterior).
-3. Salir del programa.
+* Salir del programa.
+
+## Lista de Tareas
+- [x] Registrar nuevos usuarios con su nombre, email y contraseña.
+- [] ingresar sesion.
+- [] CRUD cuenta
+- [] CRUD colchón
+- [] CRUD bolsillo
+- [] CRUD metas
+
 ### Las restricciones el problema son las siguientes:
   * La contraseña no debe ser almacenada en texto plano. Se debe usar una codificación SHA2 para guardarlas y validarlas.
   * Un usuario solo puede enviar o retirar el dinero disponible en su cuenta.
