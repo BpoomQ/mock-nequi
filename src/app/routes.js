@@ -12,4 +12,8 @@ module.exports = (app, passport) => {
   app.post('/add', async (req, res) => {
 
   })
+  app.get('/test', async (req, res) => {
+    res.render('menu');
+  })
+
 }
