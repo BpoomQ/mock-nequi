@@ -62,7 +62,7 @@ Disponible = Total en la cuenta - dinero en colchón - dinero en metas - dinero 
 
 ## Lista de Tareas
 - [x] Registrar nuevos usuarios con su nombre, email y contraseña.
-- [ ] ingresar sesion.
+- [x] ingresar sesion.
 - [ ] CRUD cuenta
 - [ ] CRUD colchón
 - [ ] CRUD bolsillo
