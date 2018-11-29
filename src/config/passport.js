@@ -20,8 +20,6 @@ module.exports = function (passport) {
     passReqToCallback: true
   },
   function (req, email, password, done) {
-    console.log(req.body);
-    console.log(email+" "+password);
     User.findOne({'local.email': email}, function(err,user){
       if (err){
         return done(err)
@@ -29,16 +27,15 @@ module.exports = function (passport) {
       if (user){
         return done(null, false, req.flash('siginMessage','Ya existe un usuario registrado con ese email.'))
       } else {
-        /*console.log(lastName);
         var newUser = new User()
-        newUser.local.name = name
-        newUser.local.lastName = lastName
-        newUser.local.email = email
-        newUser.local.passport = newUser.hashingPassword(password)
+        newUser.local.name = req.body.name
+        newUser.local.lastName = req.body.lastName
+        newUser.local.email = req.body.email
+        newUser.local.password = newUser.hashingPassword(req.body.password)
         newUser.save( function(err) {
           if (err) { throw err; }
           return done(null, newUser)
-        })*/
+        })
       }
     })
   }))

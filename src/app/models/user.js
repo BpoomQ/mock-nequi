@@ -11,8 +11,6 @@ const userSchema = new  mongoose.Schema({
 })
 
 userSchema.methods.hashingPassword = function(password){
-  console.log("\n\n\nACA ESTA EL SHA2!!!!!!\n");
-  console.log(SHA2.SHA256(password).toString('hex'));
   return SHA2.SHA256(password).toString('hex')
 }
 
