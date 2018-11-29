@@ -16,7 +16,6 @@ userSchema.methods.hashingPassword = function(password){
 
 userSchema.methods.validatePassword = function(password){
   password = SHA2.SHA256(password).toString('hex')
-  console.log(password==this.local.password);
   return password == (this.local.password)
 }
 

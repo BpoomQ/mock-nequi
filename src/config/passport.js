@@ -53,7 +53,7 @@ module.exports = function (passport) {
         return done(null, false, req.flash('loginMessage','No se encontro un usuario registrado con ese email'))
       }
       if (!user.validatePassword(password)) {
-        return done(null, false, req.flash('loginMessage','Usuario o Contraseña incorrecta'))
+        return done(null, false, req.flash('loginMessage','Contraseña incorrecta'))
       }
       return done(null, user)
     })

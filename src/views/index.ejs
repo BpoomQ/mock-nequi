@@ -1,13 +1,13 @@
 <% include partials/_head %>
 <% include partials/_header-login %>
 <% if(loginMessage.length>0){ %>
-  <div class="alert alert-danger">
-    <% loginMessage %>
+  <div class="alert alert-danger" align="center">
+    <%= loginMessage %>
   </div>
 <% } %>
 <% if(signinMessage.length>0){ %>
-  <div class="alert alert-info">
-    <% signinMessage %>
+  <div class="alert alert-warning" align="center">
+    <%= signinMessage %>
   </div>
 <% } %>
     <div class="container row" align="center">
