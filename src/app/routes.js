@@ -7,7 +7,7 @@ module.exports = (app, passport) => {
   })
 
   app.post('/add', passport.authenticate('local-signin',{
-    successRedirect: '/',
+    successRedirect: '/menu',
     failureRedirect: '/',
     failureFlash: true
   }))
@@ -31,9 +31,9 @@ module.exports = (app, passport) => {
 
 }
 
-function isLoggedIn(req,res,next) {
-  if (req.isAuthenticated()) {
-    return next
-  }
-  return res.redirect('/')
+function isLoggedIn (req, res, next) {
+	if (req.isAuthenticated()) {
+		return next();
+	}
+	res.redirect('/');
 }
