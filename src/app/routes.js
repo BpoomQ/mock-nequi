@@ -2,11 +2,11 @@ module.exports = (app, passport) => {
   app.get('/', (req, res)=>{
     res.render('index',{
       loginMessage: req.flash('loginMessage'),
-      siginMessage: req.flash('siginMessage')
+      signinMessage: req.flash('signinMessage')
     })
   })
 
-  app.post('/add', passport.authenticate('local-singin',{
+  app.post('/add', passport.authenticate('local-signin',{
     successRedirect: '/menu',
     failureRedirect: '/',
     failureFlash: true
@@ -14,13 +14,24 @@ module.exports = (app, passport) => {
 
   //app.post('/login', passport.authenticate(''))
 
-  app.post('/add', async (req, res) => {
-
+  app.get('/logout', (req, res)=>{
+    req.logout()
+    res.redirect('/')
   })
-  app.get('/menu', (req, res) => {
+
+  app.get('/menu', isLoggedIn, (req, res) => {
     res.render('menu',{
       user: req.user
     })
   })
 
+
+
+}
+
+function isLoggedIn(req,res,next) {
+  if (req.isAuthenticate()) {
+    return next
+  }
+  return res.redirect('/')
 }
