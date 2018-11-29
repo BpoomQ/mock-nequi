@@ -34,7 +34,7 @@ module.exports = function (passport) {
         newUser.local.password = newUser.hashingPassword(req.body.password)
         newUser.save( function(err) {
           if (err) { throw err; }
-          return done(null, newUser)
+          return done(null, newUser, req.flash('signinMessage','Registrado correctamente, por favor ingresa.'))
         })
       }
     })

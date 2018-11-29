@@ -16,7 +16,8 @@ userSchema.methods.hashingPassword = function(password){
 
 userSchema.methods.validatePassword = function(password){
   password = SHA2.SHA256(password).toString('hex')
-  return password.equals(this.password)
+  console.log(password==this.local.password);
+  return password == (this.local.password)
 }
 
 module.exports = mongoose.model('User',userSchema)

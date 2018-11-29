@@ -1,5 +1,5 @@
 module.exports = (app, passport) => {
-  app.get('/', (req, res)=>{
+  app.get('/', (req, res) => {
     res.render('index',{
       loginMessage: req.flash('loginMessage'),
       signinMessage: req.flash('signinMessage')
@@ -7,14 +7,18 @@ module.exports = (app, passport) => {
   })
 
   app.post('/add', passport.authenticate('local-signin',{
+    successRedirect: '/',
+    failureRedirect: '/',
+    failureFlash: true
+  }))
+
+  app.post('/login', passport.authenticate('local-login',{
     successRedirect: '/menu',
     failureRedirect: '/',
     failureFlash: true
   }))
 
-  //app.post('/login', passport.authenticate(''))
-
-  app.get('/logout', (req, res)=>{
+  app.get('/logout', (req, res) => {
     req.logout()
     res.redirect('/')
   })
