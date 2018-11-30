@@ -13,13 +13,9 @@
         <ul class="navbar-nav mr-auto"></ul>
         <div class="btn-group btn-group" role="group">
           <div class="btn-group btn-group" role="group">
-            <button id="Cuenta" type="button" class="btn btn-outline-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <button id="Cuenta" type="button" class="btn btn-outline-secondary" >
               Cuenta
             </button>
-            <div class="dropdown-menu" aria-labelledby="cuentaDrop">
-              <a class="dropdown-item" href="#">Informacion</a>
-              <a class="dropdown-item" href="#">Operaciones</a>
-            </div>
           </div>
           <div class="btn-group btn-group" role="group">
             <button id="Bolsillo" type="button" class="btn btn-outline-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -28,8 +24,8 @@
             <div class="dropdown-menu" aria-labelledby="BolsillosDrop">
               <a class="dropdown-item" href="#">Nuevo Bolsillo</a>
               <!-- Añade los bolsillos existentes
-              <%# for(var i = 0; i <bolsillos.length; i++){%>
-                <a class="dropdown-item" href="#">bolsillos[i].name</a>
+              <%# for(var i = 0; i <user.local.bolsillos.length; i++){%>
+                <a class="dropdown-item" href="#">user.local.bolsillos[i].name</a>
               <%#}%>
               -->
             </div>
@@ -42,8 +38,8 @@
             <div class="dropdown-menu" aria-labelledby="metasDrop">
               <a class="dropdown-item" href="#">Nueva meta</a>
               <!-- Añade las metas existentes
-              <%# for(var i = 0; i <metas.length; i++){%>
-                <a class="dropdown-item" href="#">metas[i].name</a>
+              <%# for(var i = 0; i <user.local.metas.length; i++){%>
+                <a class="dropdown-item" href="#">user.local.metas[i].name</a>
               <%#}%>
               -->
             </div>
@@ -54,4 +50,3 @@
     </nav>
   </header>
 </div>
-<br><br>

@@ -1,8 +1,32 @@
 <% include partials/_head %>
 <% include partials/_header-inside %>
 <div class="container "align="center">
-  <div class="col shadow p-3 mb-5 bg-white rounded">
-    <h1>Bienvenido <%= user.local.name%> <%=user.local.lastName%> </h1>
+  <div class="row">
+    <div class="col shadow p-3 mb-5 bg-white rounded">
+      <h1>Bienvenido <%= user.local.name%> <%=user.local.lastName%> </h1>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-6 shadow p-3 mb-5 bg-white rounded">
+      <h2>Saldo de cuenta </h2>
+      <h5>Disponible: </h5>
+      <h5>Total: </h5>
+    </div>
+
+    <div class="col-6 shadow p-3 mb-5 bg-white rounded">
+      <h2>Añadir Saldo</h2>
+        <form class="form-control-horzontal" action="/añadir" method="POST">
+          <input type="number" value="" id="SaldoIngresado" placeholder="Saldo">
+          <button type="submit" class="btn btn-outline-success" name="button">Añadir</button>
+        </form>
+
+      <h2>Realizar transferencia</h2>
+      <form class="form-control-horzontal" action="/transferir" method="POST">
+        <input type="text" name="Destinatario" value="" placeholder="Destinatario">
+        <input type="numeric" name="Cantidad" value="" placeholder="Cantidad">
+        <button type="submit" class="btn btn-outline-success" name="button">Transferir</button>
+      </form>
+    </div>
   </div>
 
 </div>
