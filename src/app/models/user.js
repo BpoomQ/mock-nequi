@@ -15,7 +15,7 @@ const GoalSchema = new Schema({
   name: String,
   goalBalance: Number,
   currentBalance: Number,
-  isFinished: Boolean,
+  status: Boolean,
   goalDate: Date
 })
 
