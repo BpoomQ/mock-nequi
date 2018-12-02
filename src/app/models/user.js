@@ -8,6 +8,7 @@ const MattressSchema = new Schema({
 })
 
 const PocketSchema = new Schema({
+  name: String,
   pocketBalance: Number
 })
 
