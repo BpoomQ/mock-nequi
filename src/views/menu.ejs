@@ -6,27 +6,42 @@
       <h1>Bienvenido <%= user.local.name%> <%=user.local.lastName%> </h1>
     </div>
   </div>
+  <!--
+  <%# if(transferMessage.length>0){ %>
+    <div class="alert alert-warning" align="center">
+      <%# transferMessage %>
+    </div>
+  <%# } %>
+  -->
   <div class="row">
     <div class="col-6 shadow p-3 mb-5 bg-white rounded">
-      <h2>Saldo de cuenta </h2>
-      <h5>Disponible: </h5>
-      <h5>Total: </h5>
+      <h3>Saldo en la cuenta: <small class="text-muted">$ <%= user.account.accountBalance %></small></h3>
+      <h3>Saldo en la disponible: <small class="text-muted">$ <%= user.account.accountBalance %></small></h3>
+      <h3>Saldo en el colchon: <small class="text-muted">$ <%= user.account.mattress.mattressBalance %></small></h3>
+      <h3>Saldo en los bolsillo: <small class="text-muted">$ <%= user.account.pockets.pocketBalance %></small></h3>
+      <h3>Saldo en las metas: <small class="text-muted">$ <%= user.account.goals.goalBalance %></small></h3>
     </div>
 
-    <div class="col-6 shadow p-3 mb-5 bg-white rounded">
+    <div class="col-6 shadow p-3 mb-5 bg-white rounded" align="center">
       <h2>Añadir Saldo</h2>
-        <form class="form-control-horzontal" action="/añadir" method="POST">
-          <input type="number" value="" id="SaldoIngresado" placeholder="Saldo">
-          <button type="submit" class="btn btn-outline-success" name="button">Añadir</button>
-        </form>
-
+      <form class="row form-inline" action="/addMoney" method="POST">
+        <div class="col-3"></div>
+        <div class="input-group">
+          <input type="number" class="form-control" value="" name="SaldoIngresado" placeholder="Saldo" min="0.1" required>
+        </div>
+        <button type="submit" class="btn btn-outline-success" name="button">Añadir</button>
+      </form><br>
       <h2>Realizar transferencia</h2>
-      <form class="form-control-horzontal" action="/transferir" method="POST">
-        <input type="text" name="Destinatario" value="" placeholder="Destinatario">
-        <input type="numeric" name="Cantidad" value="" placeholder="Cantidad">
+      <form class="row form-inline" action="/transfer" method="POST">
+        <div class="col-1"></div>
+        <div class="input-group">
+          <input type="text" class="form-control" name="Destinatario" value="" min="0.1" max="<%= user.account.accountBalance %>" placeholder="Destinatario" required>
+        </div>
+        <div class="input-group">
+          <input type="numeric" class="form-control" name="Cantidad" value="" placeholder="Cantidad" required>
+        </div>
         <button type="submit" class="btn btn-outline-success" name="button">Transferir</button>
       </form>
     </div>
   </div>
-
 </div>

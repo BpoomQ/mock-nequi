@@ -29,6 +29,10 @@ module.exports = (app, passport) => {
     })
   })
 
+  app.post('/addMoney',(req, res) => {
+
+  })
+
 }
 
 function isLoggedIn (req, res, next) {
