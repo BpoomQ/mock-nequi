@@ -78,6 +78,7 @@ module.exports = (app, passport, express) => {
     })
   })
 
+<<<<<<< HEAD
   app.get('/bolsillo/:userId/:pocketId', isLoggedIn,(req, res) => {
     User.findById(req.params.userId,"account.pockets", function(err, user) {
       console.log(user)
@@ -106,6 +107,41 @@ module.exports = (app, passport, express) => {
           }
         )}
       }
+=======
+  app.get('/colchon', isLoggedIn, (req, res) =>{
+    res.render('mattress',{
+      user: req.user
+    })
+  })
+  app.post('/returnMoneyToAccount',isLoggedIn, (req,res)=>{
+    User.findById({_id: req.body.idUser},function(err, user){
+      if (err) {
+        res.status(500).send()
+      }
+      console.log(req.body);
+      var amount = parseInt(req.body.money)
+      user.account.mattress.mattressBalance -= amount
+      user.account.accountBalance += amount
+      user.save()
+      res.render('mattress',{
+        user: user
+      })
+    })
+  })
+
+  app.post('/addMoneyToMattress',isLoggedIn, (req, res) =>{
+    User.findById({_id: req.body.idUser},function(err, user){
+      if (err) {
+        res.status(500).send()
+      }
+      var amount = parseInt(req.body.money)
+      user.account.mattress.mattressBalance += amount
+      user.account.accountBalance -= amount
+      user.save()
+      res.render('mattress',{
+        user: user
+      })
+>>>>>>> fa4681d52dbf2cc6338235ac337822aaf3e5ae7e
     })
   })
 

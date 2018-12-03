@@ -4,22 +4,27 @@
 	<div class="row" align="center">
 		<div class="col-6 shadow p-3 mb-5 bg-white rounded">
 			<h2>Saldo disponible en cuenta: <small class="text-muted"><%= user.account.accountBalance %></small></h2>
-			<h2>Saldo en el colchon: <small class="text-muted"><%= user.account.mattress.mattressBalance %></small></h2>
+			<h2>Saldo en el colchón: <small class="text-muted"><%= user.account.mattress.mattressBalance %></small></h2>
 		</div>
 
 		<div class="col-6 shadow p-3 mb-5 bg-white rounded">
+			<h2>Mover saldo a colchón </h2>
+			<form class="form-inline" action="/addMoneyToMattress" method="POST">
+				<div class="col-4"></div>
+				<div class="input-group">
+					<input type="number" class="form-control" min="1" max="<%= user.account.accountBalance %>" name="money" placeholder="A Colchon" required>
+					<input type="text" value="<%= user._id %>" name="idUser" hidden>
+				</div>
+				<button type="submit" class="btn btn-outline-success">Mover</button>
+			</form><br>
 			<h2>Mover saldo a cuenta</h2>
-			<form class="form-control-horzontal" action="/" method="POST">
-				<input type="numeric" class="form-control" value="" id="devolverACuenta" placeholder="A Cuenta">
-				<input type="text" value="<%= user._id %>" name="idUser" hidden>
-				<button type="submit" class="btn btn-outline-success" name="button">Mover</button>
-			</form>
-
-			<h2>Mover saldo a colchon </h2>
-			<form class="form-control-horzontal" action="/addMoneyToMattress" method="POST">
-				<input type="numeric" name="money" placeholder="A Colchon">
-				<input type="text" value="<%= user._id %>" name="idUser" hidden>
-				<button type="submit" class="btn btn-outline-success name=" button">Mover</button>
+			<form class="form-inline" action="/returnMoneyToAccount" method="POST">
+				<div class="col-4"></div>
+				<div class="input-group">
+					<input type="number" class="form-control" min="1" max="<%= user.account.mattress.mattressBalance %>" name="money" placeholder="A Cuenta" required>
+					<input type="text" value="<%= user._id %>" name="idUser" hidden>
+				</div>
+				<button type="submit" class="btn btn-outline-success">Mover</button>
 			</form>
 		</div>
 	</div>
