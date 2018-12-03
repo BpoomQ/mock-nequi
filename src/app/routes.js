@@ -146,7 +146,6 @@ module.exports = (app, passport, express) => {
   })
 
   app.post('/deletePocket/:userId/:pocketId', isLoggedIn,(req, res) => {
-    //res.send(pocketId)
     User.findById(req.params.userId, function(err, user) {
       var pocket = req.body.pocketId
       var pockets = user.account.pockets

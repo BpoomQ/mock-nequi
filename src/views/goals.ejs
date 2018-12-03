@@ -6,13 +6,6 @@
       <h1><%= goal.name%></h1>
     </div>
   </div>
-  <!--
-  <%# if(transferMessage.length>0){ %>
-    <div class="alert alert-warning" align="center">
-      <%# transferMessage %>
-    </div>
-  <%# } %>
-  -->
   <div class="row">
     <div class="col-7 shadow p-3 mb-5 bg-white rounded">
       <table class="table table-hover" >
@@ -30,27 +23,27 @@
         </tr>
         <tr>
           <td><h3>Fecha maxima: </h3></td>
-          <td><h3 class="text-muted"> <%= goal.goalDate.toISOString().slice(0,10)%></h3></td>
+          <td><h3 class="text-muted"> <%= goal.goalDate.toISOString().slice(0,10) %></h3></td>
         </tr>
       </table>
     </div>
     <div class="col-5 shadow p-3 mb-5 bg-white rounded" align="center">
       <form class="form form-inline " action="/addCurrencyGoal" method="POST">
-        <div class="col-3"></div>
+        <div class="col-4"></div>
         <div class="form-control-inline">
-          <input type="number" class="form-control" value="" name="money" placeholder="Saldo" min="1" max="<%= user.account.accountBalance %>" required>
-          <button type="submit" class="btn btn-outline-success">Añadir</button>
-          <input type="text" hidden name="userId" value="<%= user._id %>">
+          <input type="number" class="form-control" name="money" placeholder="Saldo" min="1" max="<%= user.account.accountBalance %>" required>
           <input type="text" hidden name="idGoal" value="<%= goal._id%>">
+          <input type="text" hidden name="userId" value="<%= user._id %>">
         </div>
+        <button type="submit" class="btn btn-outline-success">Añadir</button>
       </form>
       <br>
       <form class="form" action="/goal-accomplished/<%= user.id%>/<%= goal._id%>" method="POST" >
         <div class="form-control-inline">
           <input type="text" hidden name="userId" value="<%= user._id %>">
           <input type="text" hidden name="idGoal" value="<%= goal._id%>">
-          <button type="submit" class="btn btn-outline-danger">Cerrar Meta</button>
         </div>
+        <button type="submit" class="btn btn-outline-danger">Cerrar Meta</button>
       </form>
     </div>
   </div>
