@@ -29,10 +29,21 @@ module.exports = (app, passport) => {
     })
   })
 
-  app.post('/addMoney',(req, res) => {
-
+  app.post('/addMoney', isLoggedIn, (req, res) => {
+    var id = req.body.idUser
+    User.findById({_id: id},function(err, user){
+      if (err) {
+        res.status(500).send()
+      }
+      var amount = user.account.accountBalance + parseInt(req.body.money)
+      user.account.accountBalance = amount
+      user.save()
+      res.render('menu',{
+        user: user
+      })
+    })
   })
-
+  
 }
 
 function isLoggedIn (req, res, next) {
