@@ -77,6 +77,38 @@ module.exports = (app, passport, express) => {
       })
     })
   })
+
+  app.get('/bolsillo/:userId/:pocketId', isLoggedIn,(req, res) => {
+    User.findById(req.params.userId,"account.pockets", function(err, user) {
+      console.log(user)
+      for (var i = 0; i < user.account.pockets.length; i++) {
+        if(user.account.pockets[i].id == req.params.pocketId){
+          pocket = (user.account.pockets[i]);
+          User.findById(req.params.userId, function(err, user) {
+            res.render('pocket',{
+              user, pocket
+            })
+          }
+        )}
+      }
+    })
+  })
+
+  app.get('/meta/:userId/:goalId', isLoggedIn,(req, res) => {
+    User.findById(req.params.userId,"account.goals", function(err, user) {
+      for (var i = 0; i < user.account.goals.length; i++) {
+        if(user.account.goals[i].id == req.params.goalId){
+          goal = (user.account.goals[i]);
+          User.findById(req.params.userId, function(err, user) {
+            res.render('goals',{
+              user, goal
+            })
+          }
+        )}
+      }
+    })
+  })
+
 }
 
 function isLoggedIn (req, res, next) {

@@ -1,0 +1,24 @@
+<% include partials/_head %>
+<% include partials/_header-inside %>
+<div class="container "align="center">
+  <div class="row">
+    <div class="col shadow p-3 mb-5 bg-white rounded">
+      <h1><%= goal.name%></h1>
+    </div>
+  </div>
+  <!--
+  <%# if(transferMessage.length>0){ %>
+    <div class="alert alert-warning" align="center">
+      <%# transferMessage %>
+    </div>
+  <%# } %>
+  -->
+  <div class="row" >
+    <div class="col shadow p-3 mb-5 bg-white rounded">
+      <h3>Dinero para la meta: <%= goal.goalBalance%></h3>
+      <h3>Dinero almacenado: <%= goal.currentBalance%></h3>
+      <h3>Fecha maxima para el cumplimiento de la meta: <%= goal.goalDate.toISOString().slice(0,10)%></h3>
+    </div>
+
+  </div>
+</div>

@@ -26,7 +26,7 @@
             <div class="dropdown-menu" aria-labelledby="BolsillosDrop">
               <button class="dropdown-item" data-toggle="modal" data-target="#pocketModal">Nuevo Bolsillo</button>
               <% for(var i = 0; i <user.account.pockets.length; i++){%>
-                <a class="dropdown-item" href="/bolsillo/<%=user.account.pockets[i]._id%>"><%=user.account.pockets[i].name %></a>
+                <a class="dropdown-item" href="/bolsillo/<%=user._id%>/<%=user.account.pockets[i]._id%>"><%=user.account.pockets[i].name %></a>
               <%}%>
             </div>
           </div>
@@ -38,7 +38,7 @@
             <div class="dropdown-menu" aria-labelledby="metasDrop">
               <button class="dropdown-item" data-toggle="modal" data-target="#goalsModal">Nueva meta</button>
               <% for(var i = 0; i <user.account.goals.length; i++){%>
-                <a class="dropdown-item" href="/meta/<%= user.account.goals[i]._id%>"><%= user.account.goals[i].name%></a>
+                <a class="dropdown-item" href="/meta/<%=user._id%>/<%= user.account.goals[i]._id%>"><%=user.account.goals[i].name%></a>
               <%}%>
             </div>
           </div>
