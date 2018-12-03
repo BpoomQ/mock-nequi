@@ -15,6 +15,7 @@
   -->
   <div class="row">
     <div class="col-7 shadow p-3 mb-5 bg-white rounded">
+      <h2>Saldo disponible en cuenta: <small class="text-muted"><%= user.account.accountBalance %></small></h2>
       <h3>Dinero para la meta: $ <%= goal.goalBalance%></h3>
       <h3>Dinero almacenado: $ <%= goal.currentBalance%></h3>
       <h3>Fecha maxima para el cumplimiento de la meta: <%= goal.goalDate.toISOString().slice(0,10)%></h3>
@@ -22,7 +23,7 @@
     <div class="col-5 shadow p-3 mb-5 bg-white rounded" align="center">
       <form class="form form-inline " action="/addCurrencyGoal" method="POST">
         <div class="form-control-inline">
-          <input type="number" class="form-control" value="" name="money" placeholder="Saldo" min="1" required>
+          <input type="number" class="form-control" value="" name="money" placeholder="Saldo" min="1" max="<%= user.account.accountBalance %>" required>
           <button type="submit" class="btn btn-outline-success">Añadir</button>
           <input type="text" hidden name="idUser" value="<%= user._id %>">
           <input type="text" hidden name="idGoal" value="<%= goal._id%>">

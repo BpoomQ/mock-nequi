@@ -169,6 +169,38 @@ module.exports = (app, passport, express) => {
     })
   })
 
+  app.post('/addCurrencyGoal',isLoggedIn, (req, res) =>{
+    User.findById({_id: req.body.idUser},function(err, user){
+      if (err) {
+        res.status(500).send()
+      }
+      var amount = parseInt(req.body.money)
+      user.account.goals.id(req.body.idGoal).currentBalance += amount
+      user.account.accountBalance -= amount
+      goal = user.account.goals.id(req.body.idGoal)
+      user.save()
+      res.render('goals',{
+        user, goal
+      })
+    })
+  })
+
+  app.post('/addCurrencyPocket',isLoggedIn, (req, res) =>{
+    User.findById({_id: req.body.idUser},function(err, user){
+      if (err) {
+        res.status(500).send()
+      }
+      var amount = parseInt(req.body.money)
+      user.account.pockets.id(req.body.pocketId).pocketBalance += amount
+      user.account.accountBalance -= amount
+      pocket = user.account.pockets.id(req.body.pocketId)
+      user.save()
+      res.render('pocket',{
+        user, pocket
+      })
+    })
+  })
+
 }
 
 function isLoggedIn (req, res, next) {
