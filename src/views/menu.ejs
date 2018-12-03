@@ -15,7 +15,7 @@
   -->
   <div class="row" >
     <div class="col-6 shadow p-3 mb-5 bg-white rounded">
-      <table class="table table-hover" >
+      <table class="table table-hover">
         <tr>
           <td><h3>Saldo en la cuenta:</h3></td>
           <td><h3 class="text-muted">$ <%= user.account.accountBalance %></h3></td>
@@ -30,7 +30,14 @@
         </tr>
         <tr>
           <td><h3>Saldo en los bolsillos:</h3></td>
-          <td><h3 class="text-muted">$ <%= user.account.pockets.pocketBalance %></h3></td>
+          <td>
+            <h3 class="text-muted">$
+              <% var sum = 0, pockets = user.account.pockets; %>
+              <% for (var i = 0; i < pockets.length; i++) { %>
+              <% sum += pockets[i].pocketBalance; } %>
+              <%= sum %>
+            </h3>
+          </td>
         </tr>
         <tr>
           <td><h3>Saldo en las metas:</h3></td>
@@ -45,7 +52,7 @@
         <div class="col-3"></div>
         <div class="input-group">
           <input type="number" class="form-control" value="" name="money" placeholder="Saldo" min="1" required>
-          <input type="text" hidden name="idUser" value="<%= user._id %>">
+          <input type="text" hidden name="userId" value="<%= user._id %>">
         </div>
         <button type="submit" class="btn btn-outline-success">Añadir</button>
       </form><br>

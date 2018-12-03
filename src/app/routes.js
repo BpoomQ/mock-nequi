@@ -32,7 +32,7 @@ module.exports = (app, passport, express) => {
   })
 
   app.post('/addMoney', isLoggedIn, (req, res) => {
-    var id = req.body.idUser
+    var id = req.body.userId
     User.findById({_id: id},function(err, user){
       if (err) {
         res.status(500).send()
@@ -84,7 +84,7 @@ module.exports = (app, passport, express) => {
     })
   })
   app.post('/returnMoneyToAccount',isLoggedIn, (req,res)=>{
-    User.findById({_id: req.body.idUser},function(err, user){
+    User.findById({_id: req.body.userId},function(err, user){
       if (err) {
         res.status(500).send()
       }
@@ -100,7 +100,7 @@ module.exports = (app, passport, express) => {
   })
 
   app.post('/addMoneyToMattress',isLoggedIn, (req, res) =>{
-    User.findById({_id: req.body.idUser},function(err, user){
+    User.findById({_id: req.body.userId},function(err, user){
       if (err) {
         res.status(500).send()
       }
@@ -116,7 +116,6 @@ module.exports = (app, passport, express) => {
 
   app.get('/bolsillo/:userId/:pocketId', isLoggedIn,(req, res) => {
     User.findById(req.params.userId,"account.pockets", function(err, user) {
-      console.log(user)
       for (var i = 0; i < user.account.pockets.length; i++) {
         if(user.account.pockets[i].id == req.params.pocketId){
           pocket = (user.account.pockets[i]);
@@ -158,9 +157,16 @@ module.exports = (app, passport, express) => {
   })
 
   app.post('/deletePocket/:userId/:pocketId', isLoggedIn,(req, res) => {
+    //res.send(pocketId)
     User.findById(req.params.userId, function(err, user) {
-      //var amount = parseInt(user.account.pockets.pocketBalance)
-      //user.account.accountBalance += amount
+      var pocket = req.body.pocketId
+      var pockets = user.account.pockets
+      for (var i = 0; i < pockets.length; i++) {
+        if(pockets[i]._id==pocket){
+          var amount = pockets[i].pocketBalance
+          user.account.accountBalance += amount
+        }
+      }
       user.account.pockets.id(req.params.pocketId).remove()
       user.save()
       res.render('menu',{
@@ -170,7 +176,7 @@ module.exports = (app, passport, express) => {
   })
 
   app.post('/addCurrencyGoal',isLoggedIn, (req, res) =>{
-    User.findById({_id: req.body.idUser},function(err, user){
+    User.findById({_id: req.body.userId},function(err, user){
       if (err) {
         res.status(500).send()
       }
@@ -186,7 +192,7 @@ module.exports = (app, passport, express) => {
   })
 
   app.post('/addCurrencyPocket',isLoggedIn, (req, res) =>{
-    User.findById({_id: req.body.idUser},function(err, user){
+    User.findById({_id: req.body.userId},function(err, user){
       if (err) {
         res.status(500).send()
       }
