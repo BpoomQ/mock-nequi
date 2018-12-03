@@ -1,4 +1,5 @@
 const User = require('./models/user');
+const Transfer = require('./models/transfer');
 
 module.exports = (app, passport, express) => {
   app.get('/', (req, res) => {
@@ -26,8 +27,12 @@ module.exports = (app, passport, express) => {
   })
 
   app.get('/menu', isLoggedIn, (req, res) => {
-    res.render('menu',{
-      user: req.user
+    User.find({},"local.email",function(err, users){
+      if(err){ res.status(500).send() }
+      res.render('menu',{
+        user: req.user,
+        users: users
+      })
     })
   })
 
@@ -134,13 +139,16 @@ module.exports = (app, passport, express) => {
   })
 
   app.post('/goal-accomplished/:userId/:goalId', isLoggedIn,(req, res) => {
-    User.findById(req.params.userId, function(err, user) {
-      if(user.account.goals.status){
-        var amount = user.account.goals.goalBalance
+    var userId = req.params.userId
+    var goalId = req.body.goalId
+    User.findById(userId, function(err, user) {
+      var goal= user.account.goals.id(goalId)
+      if(goal.status){
+        var amount = goal.currentBalance
         user.account.accountBalance += amount
-        user.account.goals.status != user.account.goals.status
+        goal.status = !goal.status
+        user.save()
       }
-      user.save()
       res.redirect('/menu')
     })
   })
@@ -199,6 +207,13 @@ module.exports = (app, passport, express) => {
       user: req.user
     })
   })
+  app.post('/transfer', isLoggedIn, (req, res) => {
+    User.findBy({email: email},function (err,user) {
+
+    })
+    redirect('/menu')
+  })
+
 }
 
 function isLoggedIn (req, res, next) {

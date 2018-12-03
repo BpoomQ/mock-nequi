@@ -31,7 +31,8 @@
       <form class="form form-inline " action="/addCurrencyGoal" method="POST">
         <div class="col-4"></div>
         <div class="form-control-inline">
-          <input type="number" class="form-control" name="money" placeholder="Saldo" min="1" max="<%= user.account.accountBalance %>" required>
+          <input type="number" class="form-control" name="money" placeholder="Saldo" min="1"
+          max='<%= (user.account.accountBalance <= goal.goalBalance)? user.account.accountBalance : goal.goalBalance %>' required>
           <input type="text" hidden name="idGoal" value="<%= goal._id%>">
           <input type="text" hidden name="userId" value="<%= user._id %>">
         </div>
@@ -41,7 +42,7 @@
       <form class="form" action="/goal-accomplished/<%= user.id%>/<%= goal._id%>" method="POST" >
         <div class="form-control-inline">
           <input type="text" hidden name="userId" value="<%= user._id %>">
-          <input type="text" hidden name="idGoal" value="<%= goal._id%>">
+          <input type="text" hidden name="goalId" value="<%= goal._id%>">
         </div>
         <button type="submit" class="btn btn-outline-danger">Cerrar Meta</button>
       </form>

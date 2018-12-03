@@ -2,7 +2,7 @@
 <% include partials/_header-inside %>
 <div class="container">
 	<div class="row" align="center">
-		<div class="col-7 shadow p-3 mb-5 bg-white rounded">
+		<div class="col-8 shadow p-3 mb-5 bg-white rounded">
 			<table class="table table-hover" >
         <tr>
           <td><h3>Saldo disponible en cuenta:</h3></td>
@@ -15,25 +15,41 @@
       </table>
 		</div>
 
-		<div class="col-5 shadow p-3 mb-5 bg-white rounded">
-			<h2>Mover saldo a colchón </h2>
-			<form class="form-inline" action="/addMoneyToMattress" method="POST">
-				<div class="col-4"></div>
-				<div class="input-group">
-					<input type="number" class="form-control" min="1" max="<%= user.account.accountBalance %>" name="money" placeholder="A Colchon" required>
-					<input type="text" value="<%= user._id %>" name="userId" hidden>
+		<div class="col-4 shadow p-3 mb-5 bg-white rounded" align="center">
+			<div class="row">
+				<div class="col-2"></div>
+				<div class="col-10">
+					<div class="row">
+						<h4>Mover saldo a colchón</h4>
+					</div>
+					<form class="form-inline" action="/addMoneyToMattress" method="POST">
+						<div class="input-group">
+							<input type="number" class="form-control" min="1" max="<%= user.account.accountBalance %>" name="money" required>
+						</div>
+						<input type="text" value="<%= user._id %>" name="userId" hidden>
+						<div class="input-group">
+							<button type="submit" class="btn btn-outline-success">Mover</button>
+						</div>
+					</form>
 				</div>
-				<button type="submit" class="btn btn-outline-success">Mover</button>
-			</form><br>
-			<h2>Mover saldo a cuenta</h2>
-			<form class="form-inline" action="/returnMoneyToAccount" method="POST">
-				<div class="col-4"></div>
-				<div class="input-group">
-					<input type="number" class="form-control" min="1" max="<%= user.account.mattress.mattressBalance %>" name="money" placeholder="A Cuenta" required>
-					<input type="text" value="<%= user._id %>" name="userId" hidden>
+			</div>
+			<div class="row">
+			  <div class="col-2"></div>
+				<div class="col-10">
+					<div class="row">
+						<h4>Mover saldo a cuenta</h4>
+					</div>
+					<form class="form-inline" action="/returnMoneyToAccount" method="POST">
+						<div class="input-group">
+							<input type="number" class="form-control" min="1" max="<%= user.account.mattress.mattressBalance %>" name="money" required>
+						</div>
+						<input type="text" value="<%= user._id %>" name="userId" hidden>
+						<div class="input-group">
+							<button type="submit" class="btn btn-outline-success">Mover</button>
+						</div>
+					</form>
 				</div>
-				<button type="submit" class="btn btn-outline-success">Mover</button>
-			</form>
+			</div>
 		</div>
 	</div>
 </div>

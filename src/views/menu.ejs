@@ -38,7 +38,7 @@
             <h3 class="text-muted">$
               <% var sum = 0, pockets = user.account.goals; %>
               <% for (var i = 0; i < pockets.length; i++) { %>
-              <% sum += pockets[i].currentBalance; } %>
+              <% pockets[i].status?sum += pockets[i].currentBalance:sum+=0; } %>
               <%= sum %>
             </h3>
           </td>
@@ -59,11 +59,16 @@
       <h2>Realizar transferencia</h2>
       <form class="row form-inline" action="/transfer" method="POST">
         <div class="col-1"></div>
+        <input type="text" name="userId" value="<%= user._id %>" hidden>
         <div class="input-group">
-          <input type="text" class="form-control" name="Destinatario" value="" min="1" max="<%= user.account.accountBalance %>" placeholder="Destinatario" required>
+          <select class="form-control" name="addressee" required>
+            <% for (var i = 0; i < users.length; i++) { %>
+            <option value="<%= users[i]._id %>"><%= users[i].local.email %></option>
+            <%}%>
+          </select>
         </div>
         <div class="input-group">
-          <input type="numeric" class="form-control" name="Cantidad" value="" placeholder="Cantidad" required>
+          <input type="number" class="form-control" name="amount" value="" placeholder="Cantidad" required>
         </div>
         <button type="submit" class="btn btn-outline-success" name="button">Transferir</button>
       </form>
