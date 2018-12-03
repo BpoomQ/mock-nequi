@@ -8,18 +8,21 @@
 		</div>
 
 		<div class="col-6 shadow p-3 mb-5 bg-white rounded">
-			<h2>Mover saldo a cuenta</h2>
-			<form class="form-control-horzontal" action="/" method="POST">
-				<input type="numeric" class="form-control" value="" id="devolverACuenta" placeholder="A Cuenta">
-				<input type="text" value="<%= user._id %>" name="idUser" hidden>
-				<button type="submit" class="btn btn-outline-success" name="button">Mover</button>
-			</form>
-
 			<h2>Mover saldo a colchon </h2>
 			<form class="form-control-horzontal" action="/addMoneyToMattress" method="POST">
-				<input type="numeric" name="money" placeholder="A Colchon">
+				<div class="form-inline">
+					<input type="number" class="form-control col-4" min="1" max="<%= user.account.accountBalance %>" name="money" placeholder="A Colchon" required>
+					<button type="submit" class="btn btn-outline-success">Mover</button>
+				</div>
 				<input type="text" value="<%= user._id %>" name="idUser" hidden>
-				<button type="submit" class="btn btn-outline-success name=" button">Mover</button>
+			</form><br>
+			<h2>Mover saldo a cuenta</h2>
+			<form class="form-control-horzontal" action="/returnMoneyToAccount" method="POST">
+				<div class="form-inline">
+					<input type="number" class="form-control col-4" min="1" max="<%= user.account.mattress.mattressBalance %>" name="money" placeholder="A Cuenta" required>
+					<button type="submit" class="btn btn-outline-success">Mover</button>
+				</div>
+				<input type="text" value="<%= user._id %>" name="idUser" hidden>
 			</form>
 		</div>
 	</div>

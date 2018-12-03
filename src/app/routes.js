@@ -83,6 +83,21 @@ module.exports = (app, passport, express) => {
       user: req.user
     })
   })
+  app.post('/returnMoneyToAccount',isLoggedIn, (req,res)=>{
+    User.findById({_id: req.body.idUser},function(err, user){
+      if (err) {
+        res.status(500).send()
+      }
+      console.log(req.body);
+      var amount = parseInt(req.body.money)
+      user.account.mattress.mattressBalance -= amount
+      user.account.accountBalance += amount
+      user.save()
+      res.render('mattress',{
+        user: user
+      })
+    })
+  })
 
   app.post('/addMoneyToMattress',isLoggedIn, (req, res) =>{
     User.findById({_id: req.body.idUser},function(err, user){
