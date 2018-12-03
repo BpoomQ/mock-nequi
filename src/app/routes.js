@@ -144,6 +144,31 @@ module.exports = (app, passport, express) => {
       }
     })
   })
+
+  app.post('/deleteGoal/:userId/:goalId', isLoggedIn,(req, res) => {
+    User.findById(req.params.userId, function(err, user) {
+      //var amount = parseInt(user.account.goals.goalBalance)
+      //user.account.accountBalance += amount
+      user.account.goals.pull(req.params.goalId)
+      user.save()
+      res.render('menu',{
+        user: user
+      })
+    })
+  })
+
+  app.post('/deletePocket/:userId/:pocketId', isLoggedIn,(req, res) => {
+    User.findById(req.params.userId, function(err, user) {
+      //var amount = parseInt(user.account.pockets.pocketBalance)
+      //user.account.accountBalance += amount
+      user.account.pockets.id(req.params.pocketId).remove()
+      user.save()
+      res.render('menu',{
+        user: user
+      })
+    })
+  })
+
 }
 
 function isLoggedIn (req, res, next) {
