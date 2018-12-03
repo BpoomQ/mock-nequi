@@ -25,8 +25,9 @@
             </button>
             <div class="dropdown-menu" aria-labelledby="BolsillosDrop">
               <button class="dropdown-item" data-toggle="modal" data-target="#pocketModal">Nuevo Bolsillo</button>
+              <a href="/bolsillos" class="dropdown-item">Lista de Bolsillos</a>
               <% for(var i = 0; i <user.account.pockets.length; i++){%>
-                <a class="dropdown-item" href="/bolsillo/<%=user._id%>/<%=user.account.pockets[i]._id%>"><%=user.account.pockets[i].name %></a>
+                <a class="dropdown-item" href="/bolsillos/<%=user._id%>/<%=user.account.pockets[i]._id%>"><%=user.account.pockets[i].name %></a>
               <%}%>
             </div>
           </div>
@@ -38,10 +39,13 @@
               Metas
             </button>
             <div class="dropdown-menu" aria-labelledby="metasDrop">
-              <button class="dropdown-item" data-toggle="modal" data-target="#goalsModal">Nueva meta</button>
-              <% for(var i = 0; i <user.account.goals.length; i++){%>
-                <a class="dropdown-item" href="/meta/<%=user._id%>/<%= user.account.goals[i]._id%>"><%=user.account.goals[i].name%></a>
-              <%}%>
+              <button class="dropdown-item" data-toggle="modal" data-target="#goalsModal">Nueva Meta</button>
+              <a href="/metas" class="dropdown-item">Lista de Metas</a>
+              <% for(var i = 0; i < user.account.goals.length; i++){%>
+                <% if(user.account.goals[i].status){ %>
+                <a class="dropdown-item" href="/metas/<%=user._id%>/<%= user.account.goals[i]._id%>"><%=user.account.goals[i].name%></a>
+                <% }%>
+              <% } %>
             </div>
           </div>
           <a href="/logout" class="btn btn-outline-danger ">Salir</a>

@@ -60,7 +60,13 @@ module.exports = (app, passport, express) => {
       if (err) {
         return done(err)
       }
-      user.account.goals.push({name: req.body.goalName, goalDate: req.body.goalDate, goalBalance: req.body.goalBalance, currentBalance: 0, status: false})
+      user.account.goals.push({
+        name: req.body.goalName,
+        goalDate: req.body.goalDate,
+        goalBalance: req.body.goalBalance,
+        currentBalance: 0,
+        status: true
+      })
       user.save()
       res.redirect('/menu')
     })
@@ -80,7 +86,7 @@ module.exports = (app, passport, express) => {
       user.account.mattress.mattressBalance -= amount
       user.account.accountBalance += amount
       user.save()
-      res.redirect('/mattress')
+      res.redirect('/colchon')
     })
   })
 
@@ -93,11 +99,11 @@ module.exports = (app, passport, express) => {
       user.account.mattress.mattressBalance += amount
       user.account.accountBalance -= amount
       user.save()
-      res.redirect('/mattress')
+      res.redirect('/colchon')
     })
   })
 
-  app.get('/bolsillo/:userId/:pocketId', isLoggedIn,(req, res) => {
+  app.get('/bolsillos/:userId/:pocketId', isLoggedIn,(req, res) => {
     User.findById(req.params.userId,"account.pockets", function(err, user) {
       for (var i = 0; i < user.account.pockets.length; i++) {
         if(user.account.pockets[i].id == req.params.pocketId){
@@ -112,7 +118,7 @@ module.exports = (app, passport, express) => {
     })
   })
 
-  app.get('/meta/:userId/:goalId', isLoggedIn,(req, res) => {
+  app.get('/metas/:userId/:goalId', isLoggedIn,(req, res) => {
     User.findById(req.params.userId,"account.goals", function(err, user) {
       for (var i = 0; i < user.account.goals.length; i++) {
         if(user.account.goals[i].id == req.params.goalId){
@@ -127,15 +133,15 @@ module.exports = (app, passport, express) => {
     })
   })
 
-  app.post('/deleteGoal/:userId/:goalId', isLoggedIn,(req, res) => {
+  app.post('/goal-accomplished/:userId/:goalId', isLoggedIn,(req, res) => {
     User.findById(req.params.userId, function(err, user) {
-      //var amount = parseInt(user.account.goals.goalBalance)
-      //user.account.accountBalance += amount
-      user.account.goals.pull(req.params.goalId)
+      if(user.account.goals.status){
+        var amount = user.account.goals.goalBalance
+        user.account.accountBalance += amount
+        user.account.goals.status != user.account.goals.status
+      }
       user.save()
-      res.render('menu',{
-        user: user
-      })
+      res.redirect('/menu')
     })
   })
 
@@ -167,7 +173,7 @@ module.exports = (app, passport, express) => {
       user.account.accountBalance -= amount
       goal = user.account.goals.id(req.body.idGoal)
       user.save()
-      res.redirect('/meta/'+req.body.userId+'/'+req.body.idGoal)
+      res.redirect('/metas/'+req.body.userId+'/'+req.body.idGoal)
     })
   })
 
@@ -181,10 +187,19 @@ module.exports = (app, passport, express) => {
       user.account.accountBalance -= amount
       pocket = user.account.pockets.id(req.body.pocketId)
       user.save()
-      res.redirect('/bolsillo/'+req.body.userId+'/'+req.body.pocketId)
+      res.redirect('/bolsillos/'+req.body.userId+'/'+req.body.pocketId)
     })
   })
-
+  app.get('/bolsillos', isLoggedIn, (req, res) =>{
+    res.render('pocketList',{
+      user: req.user
+    })
+  })
+  app.get('/metas', isLoggedIn, (req, res) =>{
+    res.render('goalList',{
+      user: req.user
+    })
+  })
 }
 
 function isLoggedIn (req, res, next) {
