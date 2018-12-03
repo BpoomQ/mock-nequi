@@ -13,20 +13,30 @@
     </div>
   <%# } %>
   -->
-  <div class="row">
+  <div class="row" >
     <div class="col-6 shadow p-3 mb-5 bg-white rounded">
-      <table class="table">
+      <table class="table table-hover" >
         <tr>
           <td><h3>Saldo en la cuenta:</h3></td>
-          <td></td>
+          <td><h3 class="text-muted">$ <%= user.account.accountBalance %></h3></td>
+        </tr>
+        <tr>
+          <td><h3>Saldo disponible:</h3></td>
+          <td><h3 class="text-muted">$ <%= user.account.accountBalance %></h3></td>
+        </tr>
+        <tr>
+          <td><h3>Saldo en el colchon:</h3></td>
+          <td><h3 class="text-muted">$ <%= user.account.mattress.mattressBalance %></h3></td>
+        </tr>
+        <tr>
+          <td><h3>Saldo en los bolsillos:</h3></td>
+          <td><h3 class="text-muted">$ <%= user.account.pockets.pocketBalance %></h3></td>
+        </tr>
+        <tr>
+          <td><h3>Saldo en las metas:</h3></td>
+          <td><h3 class="text-muted">$ <%= user.account.goals.goalBalance %></h3></td>
         </tr>
       </table>
-
-      <h3>Saldo en la cuenta: <small class="text-muted">$ <%= user.account.accountBalance %></small></h3>
-      <h3>Saldo disponible: <small class="text-muted">$ <%= user.account.accountBalance %></small></h3>
-      <h3>Saldo en el colchon: <small class="text-muted">$ <%= user.account.mattress.mattressBalance %></small></h3>
-      <h3>Saldo en los bolsillo: <small class="text-muted">$ <%= user.account.pockets.pocketBalance %></small></h3>
-      <h3>Saldo en las metas: <small class="text-muted">$ <%= user.account.goals.goalBalance %></small></h3>
     </div>
 
     <div class="col-6 shadow p-3 mb-5 bg-white rounded" align="center">
