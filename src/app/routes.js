@@ -40,9 +40,7 @@ module.exports = (app, passport, express) => {
       var amount = user.account.accountBalance + parseInt(req.body.money)
       user.account.accountBalance = amount
       user.save()
-      res.render('menu',{
-        user: user
-      })
+      res.redirect('/menu')
     })
   })
 
@@ -56,14 +54,13 @@ module.exports = (app, passport, express) => {
       }
       user.account.pockets.push({name: req.body.pocketName, pocketBalance: 0})
       user.save()
-      res.render('menu',{
-        user: user
-      })
+      res.redirect('/menu')
     })
   })
 
   app.post('/addGoal',isLoggedIn, (req, res) => {
-    User.findById(req.body.id,function(err, user) {
+    User.findById(req.body.userId,function(err, user) {
+      console.log(req.body);
       if (err) {
         return done(err)
       }
@@ -72,9 +69,7 @@ module.exports = (app, passport, express) => {
       }
       user.account.goals.push({name: req.body.goalName, goalDate: req.body.goalDate, goalBalance: req.body.goalBalance, currentBalance: 0, status: false})
       user.save()
-      res.render('menu',{
-        user: user
-      })
+      res.redirect('/menu')
     })
   })
 
@@ -93,9 +88,7 @@ module.exports = (app, passport, express) => {
       user.account.mattress.mattressBalance -= amount
       user.account.accountBalance += amount
       user.save()
-      res.render('mattress',{
-        user: user
-      })
+      res.redirect('/mattress')
     })
   })
 
@@ -108,9 +101,7 @@ module.exports = (app, passport, express) => {
       user.account.mattress.mattressBalance += amount
       user.account.accountBalance -= amount
       user.save()
-      res.render('mattress',{
-        user: user
-      })
+      res.redirect('/mattress')
     })
   })
 
@@ -169,9 +160,7 @@ module.exports = (app, passport, express) => {
       }
       user.account.pockets.id(req.params.pocketId).remove()
       user.save()
-      res.render('menu',{
-        user: user
-      })
+      res.redirect('/menu')
     })
   })
 
@@ -185,9 +174,7 @@ module.exports = (app, passport, express) => {
       user.account.accountBalance -= amount
       goal = user.account.goals.id(req.body.idGoal)
       user.save()
-      res.render('goals',{
-        user, goal
-      })
+      res.redirect('/goals/'+req.body.userId+'/'+req.body.idGoal)
     })
   })
 
@@ -201,9 +188,7 @@ module.exports = (app, passport, express) => {
       user.account.accountBalance -= amount
       pocket = user.account.pockets.id(req.body.pocketId)
       user.save()
-      res.render('pocket',{
-        user, pocket
-      })
+      res.redirect('/bolsillo/'+req.body.userId+'/'+req.body.pocketId)
     })
   })
 

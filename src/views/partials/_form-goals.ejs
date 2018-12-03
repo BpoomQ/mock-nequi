@@ -11,14 +11,14 @@
       <div class="modal-body">
         <form action="/addGoal" method="POST" name="Form">
           <div class="form-group">
-            <input type="text" class="form-control" name="goalName" placeholder="Nombre de la meta">
+            <input type="text" class="form-control" name="goalName" placeholder="Nombre de la meta" required>
           </div>
           <div class="form-group">
-            <input type="number" class="form-control" name="goalBalance" placeholder="Dinero necesario ">
+            <input type="number" class="form-control" name="goalBalance" min="1" placeholder="Dinero necesario" required>
           </div>
           <div class="form-group">
-            <input type="date" class="form-control" name="goalDate" placeholder="Plazo de la meta" min="<%= new Date().toISOString().slice(0,10)%>">
-            <input type="text" hidden name="id" value="<%= user._id %>">
+            <input type="date" class="form-control" name="goalDate" placeholder="Plazo de la meta" min="<%= new Date().toISOString().slice(0,10)%>" required>
+            <input type="text" hidden name="userId" value="<%= user._id %>">
           </div>
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
           <button type="submit" class="btn btn-primary">Crear</button>

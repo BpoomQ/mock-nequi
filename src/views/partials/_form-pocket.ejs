@@ -11,7 +11,7 @@
       <div class="modal-body">
         <form action="/addPocket" method="POST" name="Form">
           <div class="form-group">
-            <input type="text" class="form-control" name="pocketName" placeholder="Nombre del bolsillo">
+            <input type="text" class="form-control" name="pocketName" placeholder="Nombre del bolsillo" required>
             <input type="text" hidden name="id" value="<%= user._id %>">
           </div>
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>

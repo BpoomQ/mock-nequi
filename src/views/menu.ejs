@@ -41,7 +41,14 @@
         </tr>
         <tr>
           <td><h3>Saldo en las metas:</h3></td>
-          <td><h3 class="text-muted">$ <%= user.account.goals.goalBalance %></h3></td>
+          <td>
+            <h3 class="text-muted">$
+              <% var sum = 0, pockets = user.account.goals; %>
+              <% for (var i = 0; i < pockets.length; i++) { %>
+              <% sum += pockets[i].currentBalance; } %>
+              <%= sum %>
+            </h3>
+          </td>
         </tr>
       </table>
     </div>
