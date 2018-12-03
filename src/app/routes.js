@@ -208,12 +208,46 @@ module.exports = (app, passport, express) => {
     })
   })
   app.post('/transfer', isLoggedIn, (req, res) => {
-    User.findBy({email: email},function (err,user) {
-
+    var sender = req.body.userId
+    var addressee = req.body.addressee
+    var amount = parseInt(req.body.amount)
+    User.findById(sender,function (err,currencyUser) {
+      if (err) {
+        return done(err)
+      }
+      User.findById(addressee, function(err, addresseeUser){
+        if (err) {
+          return done(err)
+        }
+        currencyUser.account.accountBalance -= amount
+        addresseeUser.account.accountBalance += amount
+        currencyUser.save()
+        addresseeUser.save()
+        var transfer = new Transfer({
+          sender : sender,
+          addressee : addressee,
+          amount : amount
+        })
+        transfer.save()
+        res.redirect("/menu")
+      })
     })
-    redirect('/menu')
   })
 
+  app.get('/transfers',isLoggedIn, (req, res)=>{
+    Transfer.find({}, function(err, transfers){
+      if (err) {
+        return done(err)
+      }
+      User.find({},function(err, users){
+        res.render('transfer-history',{
+          user: req.user,
+          transfers: transfers,
+          users: users
+        })
+      })
+    })
+  })
 }
 
 function isLoggedIn (req, res, next) {
