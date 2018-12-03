@@ -1,0 +1,26 @@
+<% include partials/_head %>
+<% include partials/_header-inside %>
+<div class="container">
+	<div class="row" align="center">
+		<div class="col-6 shadow p-3 mb-5 bg-white rounded">
+			<h2>Saldo disponible en cuenta: <small class="text-muted"><%= user.account.accountBalance %></small></h2>
+			<h2>Saldo en el colchon: <small class="text-muted"><%= user.account.mattress.mattressBalance %></small></h2>
+		</div>
+
+		<div class="col-6 shadow p-3 mb-5 bg-white rounded">
+			<h2>Mover saldo a cuenta</h2>
+			<form class="form-control-horzontal" action="/" method="POST">
+				<input type="numeric" class="form-control" value="" id="devolverACuenta" placeholder="A Cuenta">
+				<input type="text" value="<%= user._id %>" name="idUser" hidden>
+				<button type="submit" class="btn btn-outline-success" name="button">Mover</button>
+			</form>
+
+			<h2>Mover saldo a colchon </h2>
+			<form class="form-control-horzontal" action="/addMoneyToMattress" method="POST">
+				<input type="numeric" name="money" placeholder="A Colchon">
+				<input type="text" value="<%= user._id %>" name="idUser" hidden>
+				<button type="submit" class="btn btn-outline-success name=" button">Mover</button>
+			</form>
+		</div>
+	</div>
+</div>
