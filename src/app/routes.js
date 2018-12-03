@@ -1,4 +1,6 @@
-module.exports = (app, passport) => {
+const User = require('./models/user');
+
+module.exports = (app, passport, express) => {
   app.get('/', (req, res) => {
     res.render('index',{
       loginMessage: req.flash('loginMessage'),
@@ -33,6 +35,37 @@ module.exports = (app, passport) => {
 
   })
 
+  app.post('/addPocket',isLoggedIn, (req, res) => {
+    User.findById(req.body.id,function(err, user) {
+      if (err) {
+        return done(err)
+      }
+      if (!user) {
+        console.log("No se encontro");
+      }
+      user.account.pockets.push({name: req.body.pocketName, pocketBalance: 0})
+      user.save()
+      res.render('menu',{
+        user: user
+      })
+    })
+  })
+
+  app.post('/addGoal',isLoggedIn, (req, res) => {
+    User.findById(req.body.id,function(err, user) {
+      if (err) {
+        return done(err)
+      }
+      if (!user) {
+        console.log("No se encontro");
+      }
+      user.account.goals.push({name: req.body.goalName, goalDate: req.body.goalDate, goalBalance: req.body.goalBalance, currentBalance: 0, status: false})
+      user.save()
+      res.render('menu',{
+        user: user
+      })
+    })
+  })
 }
 
 function isLoggedIn (req, res, next) {

@@ -1,3 +1,5 @@
+<% include _form-pocket %>
+<% include _form-goals %>
 <br>
 <div class="container shadow p-3 mb-5 bg-white rounded">
   <header>
@@ -22,12 +24,10 @@
               Bolsillos
             </button>
             <div class="dropdown-menu" aria-labelledby="BolsillosDrop">
-              <a class="dropdown-item" href="#">Nuevo Bolsillo</a>
-              <!-- Añade los bolsillos existentes
-              <%# for(var i = 0; i <user.local.bolsillos.length; i++){%>
-                <a class="dropdown-item" href="#">user.local.bolsillos[i].name</a>
-              <%#}%>
-              -->
+              <button class="dropdown-item" data-toggle="modal" data-target="#pocketModal">Nuevo Bolsillo</button>
+              <% for(var i = 0; i <user.account.pockets.length; i++){%>
+                <a class="dropdown-item" href="#"><%=user.account.pockets[i].name %></a>
+              <%}%>
             </div>
           </div>
           <button type="button" class="btn btn-outline-secondary">Colchon</button>
@@ -36,12 +36,10 @@
               Metas
             </button>
             <div class="dropdown-menu" aria-labelledby="metasDrop">
-              <a class="dropdown-item" href="#">Nueva meta</a>
-              <!-- Añade las metas existentes
-              <%# for(var i = 0; i <user.local.metas.length; i++){%>
-                <a class="dropdown-item" href="#">user.local.metas[i].name</a>
-              <%#}%>
-              -->
+              <button class="dropdown-item" data-toggle="modal" data-target="#goalsModal">Nueva meta</button>
+              <% for(var i = 0; i <user.account.goals.length; i++){%>
+                <a class="dropdown-item" href="#"><%= user.account.goals[i].name%></a>
+              <%}%>
             </div>
           </div>
           <a href="/logout" class="btn btn-outline-danger ">Salir</a>
