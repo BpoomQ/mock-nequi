@@ -142,7 +142,8 @@ module.exports = (app, passport, express) => {
           }
         )}
       }
-
+    })
+  })
 }
 
 function isLoggedIn (req, res, next) {
