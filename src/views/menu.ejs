@@ -27,16 +27,16 @@
       <form class="row form-inline" action="/addMoney" method="POST">
         <div class="col-3"></div>
         <div class="input-group">
-          <input type="number" class="form-control" value="" name="SaldoIngresado" placeholder="Saldo" min="0.1" required>
-          <input type="text" hidden name="id" value="<%= user._id %>">
+          <input type="number" class="form-control" value="" name="money" placeholder="Saldo" min="1" required>
+          <input type="text" hidden name="idUser" value="<%= user._id %>">
         </div>
-        <button type="submit" class="btn btn-outline-success">Añadiraaa</button>
+        <button type="submit" class="btn btn-outline-success">Añadir</button>
       </form><br>
       <h2>Realizar transferencia</h2>
       <form class="row form-inline" action="/transfer" method="POST">
         <div class="col-1"></div>
         <div class="input-group">
-          <input type="text" class="form-control" name="Destinatario" value="" min="0.1" max="<%= user.account.accountBalance %>" placeholder="Destinatario" required>
+          <input type="text" class="form-control" name="Destinatario" value="" min="1" max="<%= user.account.accountBalance %>" placeholder="Destinatario" required>
         </div>
         <div class="input-group">
           <input type="numeric" class="form-control" name="Cantidad" value="" placeholder="Cantidad" required>
