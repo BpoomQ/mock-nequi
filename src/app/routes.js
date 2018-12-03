@@ -49,9 +49,6 @@ module.exports = (app, passport, express) => {
       if (err) {
         return done(err)
       }
-      if (!user) {
-        console.log("No se encontro");
-      }
       user.account.pockets.push({name: req.body.pocketName, pocketBalance: 0})
       user.save()
       res.redirect('/menu')
@@ -60,12 +57,8 @@ module.exports = (app, passport, express) => {
 
   app.post('/addGoal',isLoggedIn, (req, res) => {
     User.findById(req.body.userId,function(err, user) {
-      console.log(req.body);
       if (err) {
         return done(err)
-      }
-      if (!user) {
-        console.log("No se encontro");
       }
       user.account.goals.push({name: req.body.goalName, goalDate: req.body.goalDate, goalBalance: req.body.goalBalance, currentBalance: 0, status: false})
       user.save()
@@ -83,7 +76,6 @@ module.exports = (app, passport, express) => {
       if (err) {
         res.status(500).send()
       }
-      console.log(req.body);
       var amount = parseInt(req.body.money)
       user.account.mattress.mattressBalance -= amount
       user.account.accountBalance += amount
@@ -171,10 +163,11 @@ module.exports = (app, passport, express) => {
       }
       var amount = parseInt(req.body.money)
       user.account.goals.id(req.body.idGoal).currentBalance += amount
+      user.account.goals.id(req.body.idGoal).goalBalance -= amount
       user.account.accountBalance -= amount
       goal = user.account.goals.id(req.body.idGoal)
       user.save()
-      res.redirect('/goals/'+req.body.userId+'/'+req.body.idGoal)
+      res.redirect('/meta/'+req.body.userId+'/'+req.body.idGoal)
     })
   })
 
