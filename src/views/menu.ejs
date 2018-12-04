@@ -1,5 +1,11 @@
 <% include partials/_head %>
 <% include partials/_header-inside %>
+<% var sum = 0, pockets = user.account.pockets; %>
+<% for (var i = 0; i < pockets.length; i++) { %>
+<% sum += pockets[i].pocketBalance; } %>
+<% var sumGoal = 0, pockets = user.account.goals; %>
+<% for (var i = 0; i < pockets.length; i++) { %>
+<% pockets[i].status?sumGoal += pockets[i].currentBalance:sumGoal+=0; } %>
 <div class="container "align="center">
   <div class="row">
     <div class="col shadow p-3 mb-5 bg-white rounded">
@@ -11,7 +17,7 @@
       <table class="table table-hover">
         <tr>
           <td><h3>Saldo en la cuenta:</h3></td>
-          <td><h3 class="text-muted">$ <%= user.account.accountBalance %></h3></td>
+          <td><h3 class="text-muted">$ <%= user.account.accountBalance+user.account.mattress.mattressBalance+sum+sumGoal %></h3></td>
         </tr>
         <tr>
           <td><h3>Saldo disponible:</h3></td>
@@ -25,9 +31,6 @@
           <td><h3>Saldo en los bolsillos:</h3></td>
           <td>
             <h3 class="text-muted">$
-              <% var sum = 0, pockets = user.account.pockets; %>
-              <% for (var i = 0; i < pockets.length; i++) { %>
-              <% sum += pockets[i].pocketBalance; } %>
               <%= sum %>
             </h3>
           </td>
@@ -36,10 +39,7 @@
           <td><h3>Saldo en las metas:</h3></td>
           <td>
             <h3 class="text-muted">$
-              <% var sum = 0, pockets = user.account.goals; %>
-              <% for (var i = 0; i < pockets.length; i++) { %>
-              <% pockets[i].status?sum += pockets[i].currentBalance:sum+=0; } %>
-              <%= sum %>
+              <%= sumGoal %>
             </h3>
           </td>
         </tr>
@@ -61,14 +61,16 @@
         <div class="col-1"></div>
         <input type="text" name="userId" value="<%= user._id %>" hidden>
         <div class="input-group">
-          <select class="form-control" name="addressee" required>
+          <select class="form-control" name="addressee"  required>
+            <option disabled>selecciona un usuario</option>
             <% for (var i = 0; i < users.length; i++) { %>
+              <% if(users[i]._id.toString() != user._id.toString()){ %>
             <option value="<%= users[i]._id %>"><%= users[i].local.email %></option>
-            <%}%>
+            <%}}%>
           </select>
         </div>
         <div class="input-group">
-          <input type="number" class="form-control" name="amount" value="" placeholder="Cantidad" required>
+          <input type="number" class="form-control" name="amount" min="<%= user.account.accountBalance<=0?1:1 %>" max="<%= user.account.accountBalance %>" placeholder="Cantidad" required>
         </div>
         <button type="submit" class="btn btn-outline-success">Transferir</button>
       </form>

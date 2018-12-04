@@ -31,7 +31,7 @@
       <form class="form form-inline " action="/addCurrencyGoal" method="POST">
         <div class="col-4"></div>
         <div class="form-control-inline">
-          <input type="number" class="form-control" name="money" placeholder="Saldo" min="1"
+          <input type="number" class="form-control" name="money" placeholder="Saldo" min="<%= user.account.accountBalance<=0?1:1 %>"
           max='<%= (user.account.accountBalance <= goal.goalBalance)? user.account.accountBalance : goal.goalBalance %>' required>
           <input type="text" hidden name="idGoal" value="<%= goal._id%>">
           <input type="text" hidden name="userId" value="<%= user._id %>">

@@ -24,7 +24,7 @@
 					</div>
 					<form class="form-inline" action="/addMoneyToMattress" method="POST">
 						<div class="input-group">
-							<input type="number" class="form-control" min="1" max="<%= user.account.accountBalance %>" name="money" required>
+							<input type="number" class="form-control" min="<%= user.account.accountBalance<=0?1:1 %>" max="<%= user.account.accountBalance %>" name="money" required>
 						</div>
 						<input type="text" value="<%= user._id %>" name="userId" hidden>
 						<div class="input-group">
@@ -41,7 +41,7 @@
 					</div>
 					<form class="form-inline" action="/returnMoneyToAccount" method="POST">
 						<div class="input-group">
-							<input type="number" class="form-control" min="1" max="<%= user.account.mattress.mattressBalance %>" name="money" required>
+							<input type="number" class="form-control" min="<%= user.account.accountBalance<=0?1:1 %>" max="<%= user.account.mattress.mattressBalance %>" name="money" required>
 						</div>
 						<input type="text" value="<%= user._id %>" name="userId" hidden>
 						<div class="input-group">

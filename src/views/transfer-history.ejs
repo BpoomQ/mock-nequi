@@ -17,7 +17,11 @@
           <% if(transfers[i].sender.toString() == user._id.toString()){ %>
           <tr>
             <th scope="row"><%= i+1 %></th>
-            <td><%= transfers[i].addressee.name %></td>
+            <% for (var j = 0; j < users.length; j++) { %>
+              <% if(users[j]._id.toString() == transfers[i].addressee.toString()){ %>
+                <td><%= users[j].local.name %></td>
+              <% break }%>
+            <%}%>
             <td><%= transfers[i].amount %></td>
           </tr>
         <%}}%>
