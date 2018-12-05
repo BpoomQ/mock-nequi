@@ -20,6 +20,7 @@
       </table>
     </div>
     <div class="col-5 shadow p-3 mb-5 bg-white rounded" align="center">
+      <h2>Añadir Dinero</h2>
       <form class="form form-inline " action="/addCurrencyPocket" method="POST">
         <div class="col-3"></div>
         <div class="form-control-inline">
@@ -35,6 +36,39 @@
           <input type="text" hidden name="pocketId" value="<%= pocket._id%>">
           <button type="submit" class="btn btn-outline-danger">Eliminar Bolsillo</button>
         </div>
+      </form>
+      <br>
+      <h2>Realizar transferencia</h2>
+      <form class="row form-inline" action="/transfer/pocket" method="POST">
+        <div class="col-1"></div>
+        <input type="text" name="userId" value="<%= user._id %>" hidden>
+        <input type="text" name="pocketId" value="<%= pocket._id %>" hidden>
+        <div class="input-group">
+          <select class="form-control" name="addressee"  required>
+            <option disabled>selecciona un usuario</option>
+            <% for (var i = 0; i < users.length; i++) { %>
+              <% if(users[i]._id.toString() != user._id.toString()){ %>
+            <option value="<%= users[i]._id %>"><%= users[i].local.email %></option>
+            <%}}%>
+          </select>
+        </div>
+        <div class="input-group">
+          <input type="number" class="form-control" name="amount" min="<%=  pocket.pocketBalance<=0?1:1 %>" max="<%=  pocket.pocketBalance %>" placeholder="Cantidad" required>
+        </div>
+        <button type="submit" class="btn btn-outline-success">Transferir</button>
+      </form>
+      <br>
+      <a href="/transfers" class="btn btn-outline-warning">Historial de Transferencias</a>
+      <br><br>
+      <h2>Retirar Dinero</h2>
+      <form class="row form-inline" action="/withdrawals/pocket" method="POST">
+        <div class="col-3"></div>
+        <div class="input-group">
+          <input type="number" class="form-control" name="money" placeholder="Saldo" min="<%= pocket.pocketBalance<=0?1:1 %>" max="<%= pocket.pocketBalance %>" required>
+          <input type="text" name="userId" value="<%= user._id %>" hidden>
+          <input type="text" hidden name="pocketId" value="<%= pocket._id%>">
+        </div>
+        <button type="submit" class="btn btn-success">Retirar</button>
       </form>
     </div>
   </div>

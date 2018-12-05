@@ -114,8 +114,11 @@ module.exports = (app, passport, express) => {
         if(user.account.pockets[i].id == req.params.pocketId){
           pocket = (user.account.pockets[i]);
           User.findById(req.params.userId, function(err, user) {
-            res.render('pocket',{
-              user, pocket
+            User.find({},"local.email",function(err, users){
+              if(err){ res.status(500).send() }
+              res.render('pocket',{
+                user, pocket, users
+              })
             })
           }
         )}
@@ -192,11 +195,11 @@ module.exports = (app, passport, express) => {
       var amount = parseInt(req.body.money)
       user.account.pockets.id(req.body.pocketId).pocketBalance += amount
       user.account.accountBalance -= amount
-      pocket = user.account.pockets.id(req.body.pocketId)
       user.save()
       res.redirect('/bolsillos/'+req.body.userId+'/'+req.body.pocketId)
     })
   })
+
   app.get('/bolsillos', isLoggedIn, (req, res) =>{
     res.render('pocketList',{
       user: req.user
@@ -207,6 +210,37 @@ module.exports = (app, passport, express) => {
       user: req.user
     })
   })
+
+  app.post('/transfer/pocket', isLoggedIn, (req, res) => {
+    var sender = req.body.userId
+    var addressee = req.body.addressee
+    var amount = parseInt(req.body.amount)
+    var pocket = req.body.pocketId
+    console.log(pocket);
+    User.findById(sender,function (err,currencyUser) {
+      if (err) {
+        return done(err)
+      }
+      User.findById(addressee, function(err, addresseeUser){
+        if (err) {
+          return done(err)
+        }
+        console.log(currencyUser.account.pockets.id(pocket));
+        currencyUser.account.pockets.id(pocket).pocketBalance -= amount
+        addresseeUser.account.accountBalance += amount
+        currencyUser.save()
+        addresseeUser.save()
+        var transfer = new Transfer({
+          sender : sender,
+          addressee : addressee,
+          amount : amount
+        })
+        transfer.save()
+        res.redirect("/menu")
+      })
+    })
+  })
+
   app.post('/transfer', isLoggedIn, (req, res) => {
     var sender = req.body.userId
     var addressee = req.body.addressee
@@ -248,6 +282,34 @@ module.exports = (app, passport, express) => {
       })
     })
   })
+
+  app.post('/withdrawals', isLoggedIn, (req, res) => {
+    var id = req.body.userId
+    User.findById({_id: id},function(err, user){
+      if (err) {
+        res.status(500).send()
+      }
+      var amount = user.account.accountBalance - parseInt(req.body.money)
+      user.account.accountBalance = amount
+      user.save()
+      res.redirect('/menu')
+    })
+  })
+
+  app.post('/withdrawals/pocket',isLoggedIn, (req, res) =>{
+    var amount = parseInt(req.body.money)
+    var pocket = req.body.pocketId
+    console.log(pocket);
+    User.findById({_id: req.body.userId},function(err, user){
+      if (err) {
+        res.status(500).send()
+      }
+      user.account.pockets.id(pocket).pocketBalance -= amount
+      user.save()
+      res.redirect('/bolsillos/'+req.body.userId+'/'+req.body.pocketId)
+    })
+  })
+
 }
 
 function isLoggedIn (req, res, next) {
