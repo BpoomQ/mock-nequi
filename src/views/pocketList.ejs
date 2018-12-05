@@ -1,0 +1,28 @@
+<% include partials/_head %>
+<% include partials/_header-inside %>
+<div class="container "align="center">
+  <div class="col-5">
+  </div>
+  <div class="col-7 container shadow p-2 mb-5 bg-white rounded">
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Nombre</th>
+          <th scope="col">Dinero</th>
+        </tr>
+      </thead>
+      <tbody>
+        <%  var pockets = user.account.pockets
+        for (var i = 0; i < pockets.length; i++) { %>
+          <tr>
+            <th scope="row"><%= i+1 %></th>
+            <td><%= pockets[i].name %></td>
+            <td><%= pockets[i].pocketBalance %></td>
+          </tr>
+        <%}%>
+      </tbody>
+    </table>
+  </div>
+</div>
+<% include partials/_footer %>
