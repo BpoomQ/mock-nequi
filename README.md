@@ -30,50 +30,42 @@ Disponible = Total en la cuenta - dinero en colchón - dinero en metas - dinero 
 
 ### El objetivo de este proyecto es construir un sistema basado en consola que permita:
 
-* Registrar nuevos usuarios con su nombre, email y contraseña.
-* Iniciar sesión de un usuario con su email y contraseña. Cada usuario podrá realizar alguna de las siguientes opciones:
-  * Consultar el saldo de disponible en su cuenta.
-  * Consultar el saldo total en su cuenta.
-  * Ingresar una cantidad determinada de dinero a su cuenta.
-  * Retirar una cantidad determinada de dinero de su cuenta.
-  * Enviar dinero a otro usuario a través de su email, desde cualquier cuenta de ahorros.
-  * Consultar sus últimas N transacciones (ingresos, retiros, recepciones y envíos).
-  * Entrar al menú del colchón, donde podrá:
-    * Consultar el dinero guardado en el colchón.
-    * Agregar dinero disponible al colchón.
-    * Retirar dinero del colchón para que vuelva a estar disponible en la cuenta.
-    * Regresar al menú anterior.
-  * Entrar al menú de bolsillos, donde podrá:
-  * Listar la información de todos sus bolsillos (nombre y saldo).
-  * Crear un bolsillo nuevo. El bolsillo se crea con un nombre y un saldo de 0.
-  * Eliminar un bolsillo. Esto implica que el dinero que esta en dicho bolsillo, vuelve a estar disponible en la cuenta del usuario.
-  * Agregar dinero a un bolsillo.
-  * Retirar dinero de un bolsillo.
-  * Enviar dinero de un bolsillo a otro usuario a través de su email.
-  * Regresar al menú anterior.
-  * Entrar al menú de metas, donde podrá:
-  * Listar la información de todas sus metas: nombre, monto total, dinero ahorrado, dinero restante para cumplir la meta, el estado actual (cumplida o vencida) y la fecha límite.
-  * Crear un nueva meta. Nombre, monto total y fecha límite.
-  * Cerrar una meta. Esto implica que el dinero que esta en dicha meta, vuelve a estar disponible en la cuenta del usuario.
-  * Agregar dinero a una meta.
-  * Regresar al menú anterior.
-  * Cerrar sesión (volver al menú anterior).
-* Salir del programa.
-
-## Lista de Tareas
-- [x] Registrar nuevos usuarios con su nombre, email y contraseña.
-- [x] ingresar sesion.
-- [x] CRUD cuenta
-- [x] CRUD colchón
-- [x] CRUD bolsillo
-- [ ] CRUD metas
+* [x] Registrar nuevos usuarios con su nombre, email y contraseña.
+* [x] Iniciar sesión de un usuario con su email y contraseña. Cada usuario podrá realizar alguna de las siguientes opciones:
+  * [x] Consultar el saldo de disponible en su cuenta.
+  * [x] Consultar el saldo total en su cuenta.
+  * [x] Ingresar una cantidad determinada de dinero a su cuenta.
+  * [x] Retirar una cantidad determinada de dinero de su cuenta.
+  * [x] Enviar dinero a otro usuario a través de su email, desde cualquier cuenta de ahorros.
+  * [x] Consultar sus últimas N transacciones (ingresos, retiros, recepciones y envíos).
+  * [x] Entrar al menú del colchón, donde podrá:
+    * [x] Consultar el dinero guardado en el colchón.
+    * [x] Agregar dinero disponible al colchón.
+    * [x] Retirar dinero del colchón para que vuelva a estar disponible en la cuenta.
+    * [x] Regresar al menú anterior.
+  * [x] Entrar al menú de bolsillos, donde podrá:
+  * [x] Listar la información de todos sus bolsillos (nombre y saldo).
+  * [x] Crear un bolsillo nuevo. El bolsillo se crea con un nombre y un saldo de 0.
+  * [x] Eliminar un bolsillo. Esto implica que el dinero que esta en dicho bolsillo, vuelve a estar disponible en la cuenta del usuario.
+  * [x] Agregar dinero a un bolsillo.
+  * [x] Retirar dinero de un bolsillo.
+  * [x] Enviar dinero de un bolsillo a otro usuario a través de su email.
+  * [x] Regresar al menú anterior.
+  * [x] Entrar al menú de metas, donde podrá:
+  * [x] Listar la información de todas sus metas: nombre, monto total, dinero ahorrado, dinero restante para cumplir la meta, el estado actual (cumplida o vencida) y la fecha límite.
+  * [x] Crear un nueva meta. Nombre, monto total y fecha límite.
+  * [x] Cerrar una meta. Esto implica que el dinero que esta en dicha meta, vuelve a estar disponible en la cuenta del usuario.
+  * [x] Agregar dinero a una meta.
+  * [x] Regresar al menú anterior.
+  * [x] Cerrar sesión (volver al menú anterior).
+* [x] Salir del programa.
 
 ### Las restricciones el problema son las siguientes:
-  * La contraseña no debe ser almacenada en texto plano. Se debe usar una codificación SHA2 para guardarlas y validarlas.
-  * Un usuario solo puede enviar o retirar el dinero disponible en su cuenta.
-  * Si un usuario desea retirar o enviar dinero de uno de sus bolsillos, solo podrá hacerlo con el dinero almacenado en dicho bolsillo.
-  * El dinero que puede ser enviado al colchón, un bolsillo o una meta, debe provenir del dinero disponible en la cuenta.
-  * Si alguna operación no cuenta con el dinero disponible para ser exitosa, un mensaje claro de error debe ser mostrado al usuario.
+  * [x] La contraseña no debe ser almacenada en texto plano. Se debe usar una codificación SHA2 para guardarlas y validarlas.
+  * [x] Un usuario solo puede enviar o retirar el dinero disponible en su cuenta.
+  * [x] Si un usuario desea retirar o enviar dinero de uno de sus bolsillos, solo podrá hacerlo con el dinero almacenado en dicho bolsillo.
+  * [x] El dinero que puede ser enviado al colchón, un bolsillo o una meta, debe provenir del dinero disponible en la cuenta.
+  * [x] Si alguna operación no cuenta con el dinero disponible para ser exitosa, un mensaje claro de error debe ser mostrado al usuario.
 
 ### Criterios de evaluación
 * El proyecto debe ser entregado en equipo de 2 personas. Máximo 3 si el grupo es impar.
