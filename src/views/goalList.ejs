@@ -1,0 +1,38 @@
+<% include partials/_head %>
+<% include partials/_header-inside %>
+<div class="container "align="center">
+  <div class="col-12 container shadow p-2 mb-5 bg-white rounded">
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Nombre</th>
+          <th scope="col">Monto Total</th>
+          <th scope="col">Dinero Ahorrado</th>
+          <th scope="col">Dinero Restante</th>
+          <th scope="col">Estado</th>
+          <th scope="col">Fecha</th>
+        </tr>
+      </thead>
+      <tbody>
+        <%  var goals = user.account.goals
+        for (var i = 0; i < goals.length; i++) { %>
+          <tr class="<% if(goals[i].status){%> table-success <%}else{%> table-danger <%} %>" >
+            <th scope="row"><%= i+1 %></th>
+            <td><%= goals[i].name %></td>
+            <td><%= goals[i].goalBalance+goals[i].currentBalance %></td>
+            <td><%= goals[i].currentBalance %></td>
+            <td><%= goals[i].goalBalance %></td>
+            <td><% if(goals[i].status){%>
+              Cumplida
+              <% }else{ %>
+                Vencida
+                <% } %></td>
+                <td><%= goals[i].goalDate.toISOString().slice(0,10) %></td>
+                <%} %>
+          </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+<% include partials/_footer %>

@@ -1,0 +1,56 @@
+<% include _form-pocket %>
+<% include _form-goals %>
+<br>
+<div class="container shadow p-3 mb-5 bg-white rounded">
+  <header>
+    <nav class="navbar navbar-expand-lg navbar-light">
+      <a class="navbar-brand">
+        <img src="./images/NEQULI_LOGO.png" class="d-inline-block align-top" width="30" heigth="30" alt="">
+        Nequi
+      </a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto"></ul>
+        <div class="btn-group btn-group" role="group">
+          <div class="btn-group btn-group" role="group">
+            <a href="/menu" class="btn btn-outline-secondary">
+              Cuenta
+            </a>
+          </div>
+          <div class="btn-group btn-group" role="group">
+            <button id="Bolsillo" type="button" class="btn btn-outline-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Bolsillos
+            </button>
+            <div class="dropdown-menu" aria-labelledby="BolsillosDrop">
+              <button class="dropdown-item" data-toggle="modal" data-target="#pocketModal">Nuevo Bolsillo</button>
+              <a href="/bolsillos" class="dropdown-item">Lista de Bolsillos</a>
+              <% for(var i = 0; i <user.account.pockets.length; i++){%>
+                <a class="dropdown-item" href="/bolsillos/<%=user._id%>/<%=user.account.pockets[i]._id%>"><%=user.account.pockets[i].name %></a>
+              <%}%>
+            </div>
+          </div>
+          <a href="/colchon" class="btn btn-outline-secondary">
+            Colchón
+          </a>
+          <div class="btn-group btn-group" role="group">
+            <button id="Metas" type="button" class="btn btn-outline-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Metas
+            </button>
+            <div class="dropdown-menu" aria-labelledby="metasDrop">
+              <button class="dropdown-item" data-toggle="modal" data-target="#goalsModal">Nueva Meta</button>
+              <a href="/metas" class="dropdown-item">Lista de Metas</a>
+              <% for(var i = 0; i < user.account.goals.length; i++){%>
+                <% if(user.account.goals[i].status){ %>
+                <a class="dropdown-item" href="/metas/<%=user._id%>/<%= user.account.goals[i]._id%>"><%=user.account.goals[i].name%></a>
+                <% }%>
+              <% } %>
+            </div>
+          </div>
+          <a href="/logout" class="btn btn-outline-danger ">Salir</a>
+        </div>
+      </div>
+    </nav>
+  </header>
+</div>
