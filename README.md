@@ -2,7 +2,7 @@
 Ejercicio autónomo - Calificable
 Tiempo estimado: 6 sesiones
 
-## Prerequisitos e instalacion para usar
+## Requisitos e instalación
 1. Tener instalado mongodb Mongodb [link de descarga](https://www.mongodb.com/es/download-center?jmp=nav)
   * **No olvides crear la variable de entorno para mongodb, para poder usar los comandos en la consola.**
 2. Tener una carpeta en "C:\data\db" (para windows) ó correspondientemente en cada sistema operativo.
@@ -13,7 +13,7 @@ _Correr mongodb en una consola_
 ```
 mongod
 ```
-_Correr estos dos comandos en otra consola_
+_Correr estos dos comandos en otra consola en la ruta del proyecto_
 ```
 npm install
 ```
