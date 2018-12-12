@@ -4,10 +4,11 @@ Tiempo estimado: 6 sesiones
 
 ## Prerequisitos e instalacion para usar
 1. Tener instalado mongodb Mongodb [link de descarga](https://www.mongodb.com/es/download-center?jmp=nav)
-  _**No olvides crear las variables de ambiente de mongodb para poder usar la consola.**_
+  * **No olvides crear las variables de ambiente de mongodb para poder usar la consola.**
 2. Tener una carpeta en "C:\data\db" (para windows) ó correspondientemente en cada sistema operativo.
 3. Tener NodeJS [link de descarga](https://nodejs.org/es/download/)
 4. Despues de clonar el repositorio, usando la consola del sistema.
+
 _Correr mongodb en una consola_
 ```
 mongod
