@@ -8,15 +8,15 @@ Tiempo estimado: 6 sesiones
 2. Tener una carpeta en "C:\data\db" (para windows) ó correspondientemente en cada sistema operativo.
 3. Tener NodeJS [link de descarga](https://nodejs.org/es/download/)
 4. Despues de clonar el repositorio, usando la consola del sistema.
-´´´
+```
 mongod
-´´´
-´´´
+```
+```
 npm install
-´´´
-´´´
+```
+```
 npm start
-´´´
+```
 
 ## Conceptos a trabajar
 * Programación orientada a objetos
